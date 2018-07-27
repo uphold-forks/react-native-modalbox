@@ -13,7 +13,9 @@ var {
   BackHandler,
   Platform,
   Modal,
-  Keyboard
+  Keyboard,
+  StatusBar,
+  Platform
 } = require('react-native');
 
 var createReactClass = require('create-react-class');
@@ -396,7 +398,7 @@ var ModalBox = createReactClass({
    * Event called when the container view layout is calculated
    */
   onContainerLayout: function(evt) {
-    var height = evt.nativeEvent.layout.height;
+    var height = Platform.OS === 'ios' ? evt.nativeEvent.layout.height : screen.height - StatusBar.currentHeight - 0;
     var width = evt.nativeEvent.layout.width;
 
     // If the container size is still the same we're done
